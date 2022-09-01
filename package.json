@@ -7,9 +7,15 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "axios": "^0.27.2",
+    "bootstrap": "^5.2.0",
     "core-js": "^3.8.3",
+    "firebase": "^9.9.3",
+    "gsap": "^3.11.0",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
+    "vue3-google-login": "^2.0.12",
+    "vue3-google-oauth2": "^1.0.6",
     "vuex": "^4.0.0"
   },
   "devDependencies": {
