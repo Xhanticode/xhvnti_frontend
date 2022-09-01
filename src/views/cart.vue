@@ -1,7 +1,7 @@
 <template>
   <div class="cart">
    <div class="graphic-section">
-<img src="../assets/xhvnti_print.png" alt="xhvnti-print">
+<img src="../assets/xhvnti_print_light.png" alt="xhvnti-print">
    </div>
     <div class="payment-section">
       <h4>cart</h4>
@@ -67,7 +67,7 @@ methods() {
   let yocoSDK = document.createElement('script')
       yocoSDK.setAttribute('src', 'https://js.yoco.com/sdk/v1/yoco-sdk-web.js')
       document.head.appendChild(yocoSDK)
-      
+
   var sdk = new window.YocoSDK({
     publicKey: 'pk_test_4b6e19908owEqWW75c04'
   });

@@ -1,8 +1,8 @@
 <template>
   <div class="footer">
-    <h4>
-        @<span>XHVNTI</span>2022
-    </h4>
+    <h3>
+        @<span>xhvnti</span>2022
+    </h3>
   </div>
 </template>
 

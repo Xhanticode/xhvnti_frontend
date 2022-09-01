@@ -25,7 +25,9 @@ export default {
 :root {
     --dark: #1D1E18;
     --light: #FFFFF3;
+    --accent: #8C7A6B;
     --font: 'Inter', sans-serif;
+    --line: 0.06rem solid var(--dark);
 }
 * {
   margin: 0;
@@ -40,13 +42,19 @@ h1, h2, h3, h4, h5, p {
 }
 h2 {
   font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.4rem;
   
 }
-h4 {
+h3 {
   font-weight: 100;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+
 }
 p {
   font-weight: 200;
+  letter-spacing: 0.05rem;
 }
 #app {
   background-color: var(--light);
