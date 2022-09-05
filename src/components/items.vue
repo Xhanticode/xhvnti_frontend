@@ -1,5 +1,5 @@
 <template>
-<router-link :to="{name: 'item', params: {id: product.id}}">
+<router-link :to="{name: 'item', params: {id: product.product_id}}">
   <div class="product-frame">
     <img :src="product.img"/>
   </div>
@@ -9,7 +9,7 @@
 <script>
 export default {
 name: "items",
-props: ["product", 'id']
+props: ["product", "Product_id"]
 }
 </script>
 

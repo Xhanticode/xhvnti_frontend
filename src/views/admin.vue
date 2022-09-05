@@ -1,13 +1,13 @@
 <template>
   <div>
-    <login />
-    <div v-if="products && isSignedIn">
+    <login v_if="!login"/>
+    <div v-if="products && login">
         <div class="inventory">
-        <items 
-        v-for="product of products"
+        <template v-for="product of products"
         :key="product.id"
-        :product="product"
-        />
+        :product="product">
+        <img :src="product.img" alt="xhvnti clothes"/>
+        </template>
         </div>
         <div class="stats">
             <p>sales</p>
@@ -61,17 +61,17 @@
 
 <script>
     import login from '@/components/login.vue';
-    import items from '@/components/items.vue';
+
 export default {
-    // props: ["id"],
+    props: ["id"],
 components: {
     login,
-    items
 },
 data() {
     return {
         employee: "",
         products: "",
+        login: "",
         search:"",
         category:'',
         title: "",
@@ -147,6 +147,17 @@ mounted() {
   svg path,
   svg rect {
     fill: var(--button-bg);
+  }
+}
+.inventory {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  width: 60%;
+  img {
+    width: 12rem;
+    height: 20rem;
+    object-fit: cover;
   }
 }
 

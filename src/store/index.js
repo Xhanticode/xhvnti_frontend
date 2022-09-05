@@ -19,6 +19,7 @@ export default createStore({
     },
     setEmployee: (state, employee) => {
       state.employee = employee;
+
     }, setToken: (state,token) => {
       state.token = token;
     },
@@ -89,7 +90,8 @@ export default createStore({
 
       if(tokendata.token){
         context.commit('setToken', tokendata.token)
-      console.log(tokendata)
+        console.log(payload)
+        console.log(tokendata.token)
 
         // Verify token
         
@@ -97,14 +99,14 @@ export default createStore({
         
           header: {
             "Content-Type": "application/json",
-            "x-auth-token": tokendata.token
+            "x-auth-token": `${tokendata.token}`
           }
         })
         .then((res) => res.json())
-        .then((employeedata) => {
-          console.log(employeedata)
-          context.commit('setEmployee', employeedata.employee)
-          context.commit('setJwt', employeedata.jwt)
+        .then((data) => {
+          console.log(data)
+          context.commit('setEmployee', data.employee)
+          context.commit('setJwt', data.jwt)
         })
       }},
 

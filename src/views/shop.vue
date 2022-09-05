@@ -58,7 +58,7 @@ v-for="product of products"
 
 import Items from '@/components/items.vue';
 export default {
-  props: ["id"],
+  props: ["product_id"],
   components: {
     Items
 },
