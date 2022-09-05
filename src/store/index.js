@@ -90,16 +90,16 @@ export default createStore({
 
       if(tokendata.token){
         context.commit('setToken', tokendata.token)
-        console.log(payload)
-        console.log(tokendata.token)
+        const token = tokendata.token
+        console.log(token)
 
         // Verify token
         
         fetch('https://xhvnti.herokuapp.com/employees/employees/verify', {
         
-          header: {
+          headers: {
             "Content-Type": "application/json",
-            "x-auth-token": `${tokendata.token}`
+            "x-auth-token": token
           }
         })
         .then((res) => res.json())

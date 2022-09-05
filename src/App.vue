@@ -26,6 +26,7 @@ export default {
     --dark: #1D1E18;
     --light: #FFFFF3;
     --accent: #8C7A6B;
+    --shadow: #1D1E18;
     --font: 'Inter', sans-serif;
     --line: 0.06rem solid var(--dark);
 }
@@ -34,7 +35,7 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
-h1, h2, h3, h4, h5, p {
+h1, h2, h3, h4, h5, p, input, label {
   color: var(--light);
   font-size: 12px;
   font-family: var(--font);

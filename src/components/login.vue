@@ -237,7 +237,6 @@
     border-bottom: 0.05rem solid var(--light);
     background-color: transparent;
     padding: 0.4rem 1rem;
-    font-family: var(--font);
     &:focus {
       border: none;
       outline: none;

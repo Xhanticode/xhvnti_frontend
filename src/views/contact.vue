@@ -6,10 +6,10 @@
       <div class="form">
         <h2>contact</h2>
         <form action="https://formspree.io/f/mnqrjpnr" method="POST">
-            <input type="text" placeholder="name">
-            <input type="email" placeholder="email">
-            <input type="text" placeholder="phone">
-            <textarea placeholder="message"></textarea>
+            <input type="text" placeholder="name" name="name">
+            <input type="email" placeholder="email" name="email">
+            <input type="text" placeholder="phone" name="phone">
+            <textarea placeholder="message" name="message"></textarea>
             <button type="submit">
                     send 
                     <span>

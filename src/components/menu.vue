@@ -18,6 +18,7 @@
             <router-link to="/about"><p>about</p></router-link>
             <router-link to="/contact"><p>contact</p></router-link>
             <router-link to="/cart"><p>cart</p></router-link>
+            <router-link to="/admin"><p>admin</p></router-link>
         </div>
         <h3 @mouseover="menuDropdownShow">menu</h3>
     </div>
@@ -61,6 +62,7 @@ export default {
     position: relative;
 #logo {
     padding: 0.2rem 0;
+    z-index: 12;
 }
     &-dropdown {
         display: flex;
@@ -91,5 +93,42 @@ export default {
             cursor: pointer;
         }
     }
+}
+@media screen and (max-width: 390px){
+    .menu-bar {
+#logo {
+    padding: 0.2rem 0;
+}
+    &-dropdown {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        position: absolute;
+        right: 0;
+        top: 3rem;
+        height: 2rem;
+
+        &-links {
+            display: flex;
+            gap: 1rem;
+            transform: translateX(100rem);
+            a {
+                text-decoration: none;
+                &.router-link-exact-active {
+                    P {
+                        color: var(--accent);
+                    }
+                }
+            }
+        }
+        h3 {
+            padding-left: 2rem;
+            width: 6rem;
+            background: var(--dark);
+            z-index: 2;
+            cursor: pointer;
+        }
+    }
+}
 }
 </style> 
