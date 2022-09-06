@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <login v-if="!employee"/>
+  <div v-if="employee">
+    <employeeLogin v-if="!employee"/>
     <div v-if="products && employee" class="admin">
         <div class="inventory">
           <h2>Inventory</h2>
@@ -26,14 +26,17 @@
         </div>
         <div class="profile">
           <div v-if="employee" class="profile-info">
-            <h2>Profile</h2>
-            <label>Name</label><input :placeholder="employee.name"/>
-            <label>Surname</label><input :placeholder="employee.surname"/>
-            <label>Email</label><input :placeholder="employee.email"/>
-            <label>Phone</label><input :placeholder="employee.phone"/>
-            <label>Password</label><input :placeholder="employee.password"/>
-            <label>Role</label><input :placeholder="employee.role"/>
-         </div>
+            <form @submit.prevent="updateEmployee" class="profile-info">
+              <h2>Profile</h2>
+            <label>Name</label><input v-model="name" :placeholder="employee.name"/>
+            <label>Surname</label><input v-model="surname" :placeholder="employee.surname"/>
+            <label>Email</label><input v-model="email" :placeholder="employee.email"/>
+            <label>Phone</label><input v-model="phone" :placeholder="employee.phone"/>
+            <label>Password</label><input v-model="password" :placeholder="employee.password"/>
+            <label>Role</label><input v-model="role" :placeholder="employee.role"/>
+            <button type="submit" value="updateEmployee">update profile</button>
+            </form>
+            </div>
           <button class="profile-button">logout</button>
         </div>
     </div>
@@ -74,16 +77,22 @@
 </template>
 
 <script>
-    import login from '@/components/login.vue';
+    import employeeLogin from '@/components/employeeLogin.vue';
 
 export default {
     props: ["id"],
 components: {
-    login,
+    employeeLogin,
 },
 data() {
     return {
         employee: "",
+        name: '',
+        surname: '',
+        email: '',
+        phone: '',
+        password: '',
+        role: '',
         products: "",
         login: "",
         search:"",
@@ -137,9 +146,20 @@ mounted() {
     }, 
     sortProducts(){
       this.$store.commit("sortProductsByTitle");
-    }
-  },
-}
+    },
+    updateEmployee() {
+      let employee = {
+        name: this.name,
+        surname: this.surname,
+        email: this.email,
+        password: this.password,
+        phone: this.phone,
+        role: this.role,
+      };
+      this.$store.dispatch("updateEmployee", employee);
+      },
+    },
+  }
 </script>
 
 <style lang="scss">

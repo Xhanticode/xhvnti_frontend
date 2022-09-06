@@ -1,13 +1,12 @@
 <template>
-    <div class="login-section">
-        <h2 v-if='employee'>Logged in user: {{ employee.name }}</h2>
+    <div v-if="!user" class="login-section" id="customer-login">
   <div id="logout" v-if="isSignedIn">
-    <button @click='handleSignOut' id="sign-out-button">Sign Out</button>
+    <button @click='handleSignOut' class="sign-out-button">Sign Out</button>
   </div>
       <!-- Normal sign-in  -->
     <div id="normal-sign-in" v-if="!isSignedIn">
     <!-- Login Form  -->
-    <form @submit.prevent="login" class="login-form">
+    <form @submit.prevent="userLogin" class="login-form">
       <input required v-model="email" name="email" type="email" placeholder="Email" />
       <input
         type="password"
@@ -16,7 +15,11 @@
         v-model="password"
         name="password"
       />
-      <button type="submit" id="login-button" value="Login">Login</button>
+      <button type="submit" class="login-button" value="userLogin">Login</button>
+      <router-link v-if="isSignedIn" to="/shop">
+        <button>Go to admin</button>
+      </router-link>
+      
       <!-- Google sign-in  -->
     <div id="google-sign-in" v-if="!isSignedIn">
     <button @click="handleSignInGoogle">
@@ -39,16 +42,16 @@
 </div>
       <p>
         Don't have an account?
-        <button @click="toggleForm" id="register-button">register</button>
+        <button @click="toggleForm" class="register-button">register</button>
       </p>
       <div v-if="user">Welcome {{ user }}</div>
     </form>
 
     <!-- Register Form -->
-     <form @submit.prevent="register" class="register-form">
+     <form @submit.prevent="registerUser" class="register-form">
           <div>
-            <label for="fullname">Name:</label>
-            <input type="text" name="fullname" required v-model="name" />
+            <label for="name">Name:</label>
+            <input type="text" name="name" required v-model="name" />
           </div>
           <div>
             <label for="surname">Surname:</label>
@@ -59,21 +62,21 @@
             <input type="text" name="email" required v-model="email" />
           </div>
           <div>
-            <label for="password">Password:</label>
-            <input type="password" name="password" required v-model="password" />
-          </div>
-          <div>
             <label for="phone">Phone:</label>
             <input type="text" name="phone" required v-model="phone" />
           </div>
           <div>
-            <label for="role">Role:</label>
-            <input type="text" name="role" required v-model="role" />
+            <label for="password">Password:</label>
+            <input type="password" name="password" required v-model="password" />
           </div>
-          <button type="submit" value="Register">Submit</button>
+          <div>
+            <label for="shipping_address">Shipping address:</label>
+            <input type="text" name="shipping_address" required v-model="shipping_address" />
+          </div>
+          <button type="submit" value="registerUser">Submit</button>
           <p>
         have an account?
-        <button @click="toggleForm" id="register-button">login</button>
+        <button @click="toggleForm" class="register-button">login</button>
       </p>
       <div v-if="user">
       Welcome {{ user }}, Your sign up was successsul
@@ -84,6 +87,7 @@
   </template>
   
   <script>
+
   import { getAuth, signInWithPopup, signOut, GoogleAuthProvider } from "firebase/auth";
   import firebaseConfig from '../firebaseConfig';
 
@@ -92,29 +96,27 @@
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
 
-//   const callback = (response) => {
-//   console.log("Handle the response", response)};
 
   export default {
-    name: 'login',
-    props: ['employees'],
-  computed: {
-    employee() {
-      return this.$store.state.employee;
-    },
-  },
+    name: 'userLogin',
+    props: [ 'users'],
     data() {
       return {
         user: '',
-        employee: '',
         isSignedIn: false,
         name: '',
         surname: '',
         email: '',
         password: '',
         phone: '',
-        role: '',
+        shipping_address: '',
+        cart: ''
       }
+    },
+    computed: {
+      user(){
+      return this.$store.state.user;
+    },
     },
     methods: {
       async handleSignInGoogle() {
@@ -160,43 +162,49 @@
 
     //   Normal login 
 
-      login() {
-      this.$store.dispatch("login", {
+    // User login
+      userLogin() {
+      this.$store.dispatch("userLogin", {
         email: this.email,
         password: this.password,
       });
+      // this.isSignedIn = true;
       
     },
-     register() {
-      let employee = {
+
+// Register user 
+     registerUser() {
+      let user = {
         name: this.name,
         surname: this.surname,
         email: this.email,
-        password: this.password,
         phone: this.phone,
-        role: this.role,
+        password: this.password,
+        shipping_address: this.shipping_address,
       };
-      this.$store.dispatch("register", employee);
+      this.$store.dispatch("registerUser", user);
     },
+
+    // Toggle login/register form 
     toggleForm() {
         let loginForm = document.querySelector('.login-form')
         let registerForm = document.querySelector('.register-form')
         if (loginForm.style.display === "flex") {
     loginForm.style.display = "none";
     registerForm.style.display = "flex";
-  } else {
-    loginForm.style.display = "flex";
-    registerForm.style.display = "none";
-  };
-    },
-    },
-    // setup() {
-    //   const Vue3GoogleOauth = inject('Vue3GoogleOauth');
-    //   return {
-    //     Vue3GoogleOauth,
-    //   };
-    // }
-  }
+        } else {
+          loginForm.style.display = "flex";
+          registerForm.style.display = "none";
+        };
+          },
+          },
+          // setup() {
+          //   const Vue3GoogleOauth = inject('Vue3GoogleOauth');
+          //   return {
+          //     Vue3GoogleOauth,
+          //   };
+          // }
+        }
   </script>
 
 <style lang="scss">
@@ -205,6 +213,7 @@
     align-items: center;
     justify-content: center;
     margin-top: 4rem;
+    transition: 1s linear;
 
     h2 {
     position: fixed;
@@ -252,7 +261,7 @@
     color: var(--light);
     border: 0.05rem solid var(--light);
     border-radius: 0.2rem;
-    font-family: var(--p-font);
+    font-family: var(--font);
   }
   p {
     margin-inline: auto;
@@ -290,7 +299,7 @@
   border-radius: 0.5rem;
   -webkit-box-shadow: 5px 5px 16px 5px #3f3f3f;
   box-shadow: 5px 5px 16px 5px #3f3f3f;
-  font-family: var(--p-font);
+  font-family: var(--font);
   opacity: 0.5;
   input {
     border: none;
@@ -322,7 +331,7 @@
     }
   }
 }
-#register-button {
+.register-button {
   border: none;
 }
 }

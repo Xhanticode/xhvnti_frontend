@@ -64,8 +64,8 @@ export default {
 },
   data() {
     return {
-      search:"",
-      category:'',
+        search:"",
+        category:'',
         title: "",
         img: "",
         price: "",

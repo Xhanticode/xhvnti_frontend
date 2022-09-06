@@ -13,27 +13,57 @@
     </router-link>
     <div class="menu-bar-dropdown" @mouseleave="menuDropdownHide">
         <div class="menu-bar-dropdown-links">
+            <div v-if="user || employee" style="display: flex; gap: 1rem">
             <router-link to="/"><p>home</p></router-link>
             <router-link to="/shop"><p>shop</p></router-link>
             <router-link to="/about"><p>about</p></router-link>
             <router-link to="/contact"><p>contact</p></router-link>
-            <router-link to="/cart"><p>cart</p></router-link>
-            <router-link to="/admin"><p>admin</p></router-link>
+            </div>
+            <div v-else>
+            <p id="sign-in-button"  @mousedown="showSignInOptions" >sign-in</p>
+            <div class="sign-in-options" @mouseleave="hideSignInOptions">
+            <button @click="showCustomerSignIn">customer</button>
+            <button @click="showEmployeeSignIn">admin</button>
+            </div>
+            </div>
+            
+            <div v-if="user || employee" class="menu-bar-dropdown-links-profile">
+            <router-link to="/admin" v-if="employee"><p>admin</p></router-link>
+            <router-link to="/cart" v-if="user"><p>{{user.name}}</p></router-link>
+            </div>
         </div>
         <h3 @mouseover="menuDropdownShow">menu</h3>
     </div>
+    <employeeLogin />
+    <userLogin />
 </div>
 </template>
 
 <script>
-
+import employeeLogin from "@/components/employeeLogin.vue";
+import userLogin from "@/components/userLogin.vue";
 import gsap from "gsap";
 
 export default {
     name: "menu",
+    components: {
+    employeeLogin,
+    userLogin,
+},
     data() {
         return {
+            isSignedIn: false,
+            user: '',
+            employee: ''
         }
+    },
+    computed: {
+      employee(){
+      return this.$store.state.employee;
+    },
+      user(){
+      return this.$store.state.user;
+    },
     },
     methods: {
         menuDropdownShow() {
@@ -41,7 +71,31 @@ export default {
         },
         menuDropdownHide() {
             gsap.to(".menu-bar-dropdown-links", { duration: 2.5, ease: "slow(0.7, 0.7, false)", x: 300 });
-        }
+        },
+        showSignInOptions() {
+          let signInButton = document.querySelector("#sign-in-button");
+          let signInOptions = document.querySelector(".sign-in-options");
+            signInOptions.style.display = "flex";
+            signInButton.style.display = "none";
+          },
+        hideSignInOptions() {
+          let signInButton = document.querySelector("#sign-in-button");
+          let signInOptions = document.querySelector(".sign-in-options");
+            signInOptions.style.display = "none";
+            signInButton.style.display = "flex";
+          },
+        showEmployeeSignIn() {
+          let employeeForm = document.querySelector("#employee-login");
+          let customerForm = document.querySelector("#customer-login");
+            customerForm.style.display = "none";
+            employeeForm.style.display = "flex";
+          },
+        showCustomerSignIn() {
+          let employeeForm = document.querySelector("#employee-login");
+          let customerForm = document.querySelector("#customer-login");
+            customerForm.style.display = "flex";
+            employeeForm.style.display = "none";
+          },
     }
     }
 </script>
@@ -64,8 +118,18 @@ export default {
     padding: 0.2rem 0;
     z-index: 12;
 }
+#employee-login, #customer-login {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 30;
+
+}
     &-dropdown {
         display: flex;
+        align-items: center;
         gap: 1rem;
         position: absolute;
         right: 0;
@@ -74,6 +138,7 @@ export default {
 
         &-links {
             display: flex;
+            align-items: center;
             gap: 1rem;
             transform: translateX(100rem);
             a {
@@ -82,6 +147,28 @@ export default {
                     P {
                         color: var(--accent);
                     }
+                }
+            }
+            p {
+                cursor: pointer;
+            }
+            &-profile {
+                
+            }
+            .sign-in-options {
+                display: none;
+                gap: 0.5rem;
+                button {
+                    padding: 0.2rem;
+                    width: 4rem;
+                    font-weight: 100;
+                    font-size: 12px;
+                    align-self: center;
+                    background-color: transparent;
+                    color: var(--light);
+                    border: 0.05rem solid var(--light);
+                    border-radius: 0.2rem;
+                    font-family: var(--font);
                 }
             }
         }

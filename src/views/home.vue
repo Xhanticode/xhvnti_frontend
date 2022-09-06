@@ -8,7 +8,7 @@
     <h1>DECONSTRUCTION</h1>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis aut exercitationem autem ab iusto quibusdam veritatis sapiente fugit consequuntur ducimus fugiat recusandae explicabo, est, laboriosam fuga sed incidunt, illo porro?</p>
   </div> -->
-  <div id="overlay">
+  <div v-if="!employee" id="overlay">
     <div id="five"></div>
     <div id="six"></div>
   </div>
@@ -20,8 +20,22 @@
   import gsap from "gsap";
  
  export default {
+  data() {
+    return {
+      employee: '',
+      user: ''
+    }
+  },
   mounted() {
 this.landingAnimation()
+  },
+  computed: {
+    employee(){
+      return this.$store.state.employee;
+    },
+    user(){
+      return this.$store.state.user;
+    },
   },
   methods: {
     landingAnimation: function() {
