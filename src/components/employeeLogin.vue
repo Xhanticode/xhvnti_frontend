@@ -243,7 +243,7 @@
   -webkit-box-shadow: 5px 5px 16px 5px #3f3f3f;
   box-shadow: 5px 5px 16px 5px #3f3f3f;
   font-family: var(--font);
-  opacity: 0.5;
+  opacity: 0.9;
   input {
     width: 12rem;
     border: none;
