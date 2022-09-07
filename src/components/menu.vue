@@ -1,5 +1,6 @@
 <template>
 <div class="menu-bar">
+    <p v-if="user || employee" @click="logout()" id="user-logout">logout</p>
     <router-link id="logo" to="/">
         <svg width="167" height="99" viewBox="0 0 167 99" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect width="167" height="99" fill="url(#pattern0)"/>
@@ -66,6 +67,10 @@ export default {
     },
     },
     methods: {
+        logout() {
+        this.$store.commit("logout");
+        this.$router.push("/");
+        },
         menuDropdownShow() {
             gsap.to(".menu-bar-dropdown-links", { duration: 2.5, ease: "slow(0.7, 0.7, false)", x: 0 });
         },
@@ -114,6 +119,11 @@ export default {
     justify-content: center;
     align-items: center;
     position: relative;
+    #user-logout {
+        position: absolute;
+        cursor: pointer;
+        left: 2rem;
+    }
 #logo {
     padding: 0.2rem 0;
     z-index: 12;
@@ -153,7 +163,7 @@ export default {
                 cursor: pointer;
             }
             &-profile {
-                
+
             }
             .sign-in-options {
                 display: none;

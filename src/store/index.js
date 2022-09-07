@@ -23,7 +23,12 @@ export default createStore({
     },
     setEmployee: (state, employee) => {
       state.employee = employee;
-
+    },
+    setUser: (state, user) => {
+      state.user = user;
+    },
+    setUsers: (state, user) => {
+      state.users = users;
     },
      setToken: (state,token) => {
       state.token = token;
@@ -42,6 +47,9 @@ export default createStore({
     },
     clearCartItems: (state, cart) => {
       state.cart = cart;
+    },
+    logout: (state) => {
+      (state.user= ''), (state.users= ''), (state.employee= ''), (state.employees= ''), (state.token= '')
     },
 
     sortProductsByTitle: (state) => {
@@ -88,7 +96,7 @@ export default createStore({
     },
 
     // Users
-    getEmployees: async (context) => {
+    getUsers: async (context) => {
       fetch("https://xhvnti.herokuapp.com/users")
         .then((response) => response.json())
         .then((json) => context.commit("setUsers", json));
@@ -203,8 +211,26 @@ export default createStore({
     },
 
      // Update employee 1
-     updateEmployee: async (context, employee) => {
-      fetch("https://xhvnti.herokuapp.com/employees/register" +id, {
+    //  updateEmployee: async (context, employee) => {
+    //   fetch("https://xhvnti.herokuapp.com/employees/update/" + employee.id, {
+    //     method: "PATCH",
+    //     body: JSON.stringify(employee),
+    //     headers: {
+    //       "Content-type": "application/json; charset=UTF-8",
+    //     },
+    //   })
+    //     .then((response) => response.json())
+    //     .then(() => context.dispatch("setEmployee"));
+    //     // .then((data) => {
+    //     //   console.log(data);
+    //     //   context.commit('setEmployee', data.employee)
+    //     //   context.state.jwt = data.token;
+    //     // });
+    // },
+
+    // Update employee 
+    updateEmployee: async (context, employee) => {
+      fetch("https://xhvnti.herokuapp.com/employees/", {
         method: "PATCH",
         body: JSON.stringify(employee),
         headers: {
@@ -212,38 +238,13 @@ export default createStore({
         },
       })
         .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          context.commit('setEmployee', data.employee)
-          context.state.jwt = data.token;
-        });
+        .then((json) => context.commit("setEmployee", json));
     },
-
-    // Update employee 
-    // updateEmployee: async (context, employee) => {
-    //   const { id, name, surname, email, phone, password, role } = employee;
-    //   fetch("https://xhvnti.herokuapp.com/employees/update/" + id, {
-    //     method: "PUT",
-    //     body: JSON.stringify({
-    //       name: name,
-    //       surname: surname,
-    //       email: email,
-    //       phone: phone,
-    //       password: password,
-    //       role: role,
-    //     }),
-    //     headers: {
-    //       "Content-type": "application/json; charset=UTF-8",
-    //     },
-    //   })
-    //     .then((response) => response.json())
-    //     .then((json) => context.commit("setEmployee", json));
-    // },
 
   // Update user 
     updateUser: async (context, user) => {
       const { id, name, surname, email, phone, password, shipping_address, cart } = user;
-      fetch("https://xhvnti.herokuapp.com/users/update/" + id, {
+      fetch("https://xhvnti.herokuapp.com/users/update/" +id, {
         method: "PUT",
         body: JSON.stringify({
           name: name,
@@ -253,7 +254,7 @@ export default createStore({
           password: password,
           shipping_address: shipping_address,
           cart: cart
-        }),
+        }),        
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
@@ -264,42 +265,77 @@ export default createStore({
 
     // User cart
 
-    // Add to cart
-    addCart: async (context, id, userid) => {
-      userid = context.state.employee.id
-       let cart = toRaw(context.state.cart);
-       cart.push(id);
-       console.log(context.state.cart);
-       context.dispatch("updateUserCart", cart);
-     },
-     // Delete from cart
-     detletCartItem: async (context, id) => {
-       const cartCurrent = context.state.cart.filter(
-         (product) => product.id != product.id
-       );
-       context.commit("clearCartItems", cartCurrent);
-     },
- 
-     updateUserCart: async (context, cart, id) => {
-       // const { id, email, password, fullname, phone, cart, role } = employee;
-       id = context.state.employee.id;
-       fetch("https://xhvnti.herokuapp.com/employees/" + id, {
-         method: "PATCH",
-         body: JSON.stringify({
-           email: context.state.email,
-           password: context.state.password,
-           fullname: context.state.fullname,
-           phone: context.state.phone,
-           cart: context.state.cart,
-           role: context.state.role,
-         }),
-         headers: {
-           "Content-type": "application/json; charset=UTF-8",
-         },
-       })
-         .then((response) => response.json())
-         .then((json) => context.commit("setEmployee", json));
-     },
+    getcart: (context, id) => {
+      if (context.state.user === null) {
+        alert("Please Login");
+      } else {
+        id = context.state.user.user_id;
+        fetch("http://xhvnti.herokuapp.com/users/" + id + "/cart", {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            "x-auth-token": context.state.token,
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            // console.log(data)
+            context.commit("setcart", data);
+          });
+      }
+    },
+    addToCart: async (context, product, id) => {
+      console.log(product.product_id);
+      id = context.state.user.user_id;
+      // console.log(product);
+      await fetch("http://xhvnti.herokuapp.com/users/" + id + "/cart", {
+        method: "POST",
+        body: JSON.stringify({
+          product_id: product.product_id,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "x-auth-token": context.state.token,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          context.dispatch("getcart", id);
+        });
+    },
+    clearCart: async (context, id) => {
+      id = context.state.user.user_id;
+      await fetch("http://xhvnti.herokuapp.com/users/" + id + "/cart", {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "x-auth-token": context.state.token,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          context.dispatch("getcart", id);
+        });
+    },
+    deleteCartItem: async (context, list, id) => {
+      id = context.state.user.id;
+      await fetch("http://xhvnti.herokuapp.com/users/" + id + "/cart/" + list,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            "x-auth-token": context.state.token,
+          },
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          context.dispatch("getcart", id);
+        });
+    },
 
     //  Products 
 
@@ -329,7 +365,7 @@ export default createStore({
         body: JSON.stringify(product),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
-          "x-auth-token": context.state.jwt
+          // "x-auth-token": context.state.jwt
         },
       })
         .then((response) => response.json())

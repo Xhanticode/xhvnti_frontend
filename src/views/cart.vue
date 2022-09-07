@@ -1,9 +1,63 @@
 <template>
   <div class="cart">
-   <div class="graphic-section">
-<img src="../assets/xhvnti_print_light.png" alt="xhvnti-print">
-   </div>
-    <div class="payment-section">
+  <div class="graphic-section">
+    <h2><span>Cart Summary</span></h2>
+    <div v-if="cart">
+                  <div
+                    v-for="product in cart"
+                    :key="product"
+                    :product="product"
+                    class="row"
+                  >
+                    <div class="col-md-6">
+                      <p>
+                        <span class="">{{ product.name }}</span>
+                      </p>
+                    </div>
+                    <div class="col-md-4">
+                      <p>
+                        <span>R{{ product.price }}.00</span>
+                      </p>
+                    </div>
+                    <div class="col-md-2 mx-auto">
+                      <!-- <p>
+                      <span>R{{ product.price }}.00</span>
+                    </p> -->
+                      <a
+                        class="btn"
+                        @click="
+                          this.$store.dispatch('deletecartItem', product.cartid)
+                        "
+                        ><i class="fa-solid fa-trash-can"></i
+                      ></a>
+                    </div>
+                    <hr />
+                  </div>
+                  <button
+                    class="btn"
+                    @click="this.$store.dispatch('clearcart')"
+                  >
+                    Clear Cart
+                  </button>
+                  <p class="m-1">
+                    <span class="fw-bolder">Total:</span>(
+                    <span>{{ num }} product</span> )
+                    <span>R{{ total }}.00</span>
+                  </p>
+                  <button
+                    class="btn my-1"
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#checkout"
+                  >
+                    Checkout
+                  </button>
+    </div>
+    <div v-else>
+      <h2>Cart Empty</h2>
+    </div>
+  </div>
+  <div class="payment-section">
       <h4>cart</h4>
       <div class="cart-items">
         <!-- <div class="cart-items-image">
@@ -35,80 +89,41 @@
   </div>
   <p class="success-payment-message" />
 </form>
-    </div>
+  </div>
   </div>
 </template>
 
 <script>
-export default {
-mounted() {
-
-let yocoSDK = document.createElement('script')
-      yocoSDK.setAttribute('src', 'https://js.yoco.com/sdk/v1/yoco-sdk-web.js')
-      document.head.appendChild(yocoSDK)
-
-  // // Replace the supplied `publicKey` with your own.
-  // // Ensure that in production you use a production public_key.
-  // var sdk = new window.YocoSDK({
-  //   publicKey: 'pk_test_4b6e19908owEqWW75c04'
-  // });
-
-  // // Create a new dropin form instance
-  // var inline = sdk.inline({
-  //   layout: 'field',
-  //   amountInCents: 2499,
-  //   currency: 'ZAR'
-  // });
-  // // this ID matches the id of the element we created earlier.
-  // inline.mount('#card-frame');
-},
-methods() {
-
-  let yocoSDK = document.createElement('script')
-      yocoSDK.setAttribute('src', 'https://js.yoco.com/sdk/v1/yoco-sdk-web.js')
-      document.head.appendChild(yocoSDK)
-
-  var sdk = new window.YocoSDK({
-    publicKey: 'pk_test_4b6e19908owEqWW75c04'
-  });
-
-  // Create a new dropin form instance
-  var inline = sdk.inline({
-    layout: 'field',
-    amountInCents: 2499,
-    currency: 'ZAR'
-  });
-  // this ID matches the id of the element we created earlier.
-  inline.mount('#card-frame');
-   // Run our code when your form is submitted
-  var form = document.getElementById('payment-form');
-  var submitButton = document.getElementById('pay-button');
-  form.addEventListener('submit', function (event) {
-    event.preventDefault()
-    // Disable the button to prevent multiple clicks while processing
-    submitButton.disabled = true;
-    // This is the inline object we created earlier with the sdk
-    inline.createToken().then(function (result) {
-      // Re-enable button now that request is complete
-      // (i.e. on success, on error and when auth is cancelled)
-      submitButton.disabled = false;
-      if (result.error) {
-        const errorMessage = result.error.message;
-        errorMessage && alert("error occured: " + errorMessage);
-      } else {
-        const token = result;
-        alert("card successfully tokenised: " + token.id);
-      }
-    }).catch(function (error) {
-      // Re-enable button now that request is complete
-      submitButton.disabled = false;
-      alert("error occured: " + error);
-    });
-  });
-  // Any additional form data you want to submit to your backend should be done here, or in another event listener
-},
-}
-</script>
+  export default {
+    computed: {
+      cart() {
+        return this.$store.state.cart;
+      },
+      total() {
+        let prices = this.$store.state.cart;
+        if (prices != null) {
+          let sum = prices.reduce((x, cart) => {
+            return x + cart.price;
+          }, 0);
+          return sum;
+        }
+      },
+      num: function () {
+        let Cnum = this.$store.state.cart;
+        if (Cnum === null || Cnum === undefined) {
+          Cnum = 0;
+          return Cnum;
+        } else {
+          let i = Cnum.length;
+          return i;
+        }
+      },
+    },
+    mounted() {
+      this.$store.dispatch("getcart");
+    },
+  };
+  </script>
 
 <style lang="scss">
 .cart {

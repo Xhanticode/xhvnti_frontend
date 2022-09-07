@@ -1,9 +1,34 @@
 <template>
   <div v-if="employee">
     <employeeLogin v-if="!employee"/>
+    <div>
+      <form @submit.prevent="addProduct" class="add-product-form">
+              <h2>Add Product</h2>
+              <label>Product ID</label><input v-model="product_id" placeholder="0"/>
+            <label>Title</label><input v-model="title" placeholder="title"/>
+            <label>Image link</label><input v-model="img" placeholder="http://image.com"/>
+            <label>Price</label><input v-model="price" placeholder="price"/>
+            <label>Quantity</label><input v-model="qty" placeholder="5"/>
+            <label>Colour</label><input v-model="colour" placeholder="yellow"/>
+            <textarea v-model="description" placeholder="description" />
+            <button type="submit" value="addProduct">Add</button>
+            </form>
+    </div>
     <div v-if="products && employee" class="admin">
         <div class="inventory">
           <h2>Inventory</h2>
+          <span @click="addProductModal">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_101_3)">
+<path d="M30 17H19V6C19 5.73478 18.8946 5.48043 18.7071 5.29289C18.5196 5.10536 18.2652 5 18 5C17.7348 5 17.4804 5.10536 17.2929 5.29289C17.1054 5.48043 17 5.73478 17 6V17H6C5.73478 17 5.48043 17.1054 5.29289 17.2929C5.10536 17.4804 5 17.7348 5 18C4.99506 18.13 5.01805 18.2595 5.06739 18.3798C5.11674 18.5001 5.19131 18.6085 5.28608 18.6976C5.38084 18.7867 5.4936 18.8544 5.61675 18.8962C5.7399 18.938 5.87059 18.953 6 18.94H17V30C17 30.2652 17.1054 30.5196 17.2929 30.7071C17.4804 30.8946 17.7348 31 18 31C18.2652 31 18.5196 30.8946 18.7071 30.7071C18.8946 30.5196 19 30.2652 19 30V19H30C30.2652 19 30.5196 18.8946 30.7071 18.7071C30.8946 18.5196 31 18.2652 31 18C31 17.7348 30.8946 17.4804 30.7071 17.2929C30.5196 17.1054 30.2652 17 30 17Z" fill="black"/>
+</g>
+<defs>
+<clipPath id="clip0_101_3">
+<rect width="36" height="36" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+          </span>
         <template v-for="product of products"
         :key="product.id"
         :product="product">
@@ -28,6 +53,7 @@
           <div v-if="employee" class="profile-info">
             <form @submit.prevent="updateEmployee" class="profile-info">
               <h2>Profile</h2>
+              <input v-model="employee_id" :placeholder="employee.employee_id"/>
             <label>Name</label><input v-model="name" :placeholder="employee.name"/>
             <label>Surname</label><input v-model="surname" :placeholder="employee.surname"/>
             <label>Email</label><input v-model="email" :placeholder="employee.email"/>
@@ -80,7 +106,7 @@
     import employeeLogin from '@/components/employeeLogin.vue';
 
 export default {
-    props: ["id"],
+    props: ["id",],
 components: {
     employeeLogin,
 },
@@ -108,6 +134,7 @@ data() {
   },
 mounted() {
     this.$store.dispatch("getProducts");
+    this.$store.dispatch("updateEmployee");
   },
   computed: {
     filteredProducts() {
@@ -149,15 +176,20 @@ mounted() {
     },
     updateEmployee() {
       let employee = {
+        employee_id: this.employee_id,
         name: this.name,
         surname: this.surname,
         email: this.email,
         password: this.password,
         phone: this.phone,
-        role: this.role,
+        role: this.role
       };
       this.$store.dispatch("updateEmployee", employee);
       },
+      addProductModal() {
+          let addProductForm = document.querySelector(".add-product-form");
+          addProductForm.style.display = "flex";
+          },
     },
   }
 </script>

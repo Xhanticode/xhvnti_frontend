@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
     <h3>
-        @<span>xhvnti</span>2022
+        &copy;<span>xhvnti</span>2022
     </h3>
   </div>
 </template>
