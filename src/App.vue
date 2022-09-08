@@ -26,6 +26,7 @@ export default {
     --dark: #1D1E18;
     --light: #FFFFF3;
     --accent: #8C7A6B;
+    --highlight: #D2691E;
     --shadow: #1D1E18;
     --font: 'Inter', sans-serif;
     --line: 0.06rem solid var(--dark);

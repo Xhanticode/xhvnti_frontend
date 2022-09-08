@@ -44,35 +44,39 @@ mounted(){
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+  .body {
+    background-color: var(--dark);
+  }
 .product {
   display: flex;
+  justify-content: center;
+  align-items: center;
 
   .product-image {
     height: 100%;
-    width: 60%;
-    position: relative;
+    width: 40%;
     img {
-      width: 100%;
-      height:auto;
-      position: absolute;
-      bottom: 0;
+      width: 26rem;
+      height: 34rem;
+      object-fit: cover;
     }
   }
 .product-info {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 1rem;
   width: 40%;
   padding: 2rem;
   position: relative;
 
   h2 {
-    color: var(--dark);
+    color: var(--light);
     margin: 4rem 0;
 }
 p {
-  color: var(--dark);
+  color: var(--light);
   #price, #colour {
     padding-right: 0.5rem;
     font-weight: 300;
@@ -89,11 +93,19 @@ p {
   position: absolute;
   right: 4rem;
   top: 6rem;
+    path {
+      fill: var(--light);
+      stroke: var(--light);
+    }
   }
 #cart-button {
   position: absolute;
   right: 4rem;
   bottom: 2rem;
+    path {
+      fill: var(--light);
+      stroke: var(--light);
+    }
   }
 }
 }

@@ -117,12 +117,16 @@ export default {
 };
 </script>  
 
-<style lang="scss">
+<style lang="scss" scoped>
+  .body {
+    background-color: var(--dark);
+  }
 .products-gallery {
   display: flex;
   // gap: 2rem;
   overflow-x: scroll;
   position: relative;
+  background-color: var(--dark);
 &::-webkit-scrollbar {
   display: none;
 }

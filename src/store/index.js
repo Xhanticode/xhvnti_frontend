@@ -210,27 +210,9 @@ export default createStore({
         });
     },
 
-     // Update employee 1
-    //  updateEmployee: async (context, employee) => {
-    //   fetch("https://xhvnti.herokuapp.com/employees/update/" + employee.id, {
-    //     method: "PATCH",
-    //     body: JSON.stringify(employee),
-    //     headers: {
-    //       "Content-type": "application/json; charset=UTF-8",
-    //     },
-    //   })
-    //     .then((response) => response.json())
-    //     .then(() => context.dispatch("setEmployee"));
-    //     // .then((data) => {
-    //     //   console.log(data);
-    //     //   context.commit('setEmployee', data.employee)
-    //     //   context.state.jwt = data.token;
-    //     // });
-    // },
-
     // Update employee 
     updateEmployee: async (context, employee) => {
-      fetch("https://xhvnti.herokuapp.com/employees/", {
+      fetch("https://xhvnti.herokuapp.com/employees/update/" + employee.employee_id, {
         method: "PATCH",
         body: JSON.stringify(employee),
         headers: {
@@ -240,27 +222,42 @@ export default createStore({
         .then((response) => response.json())
         .then((json) => context.commit("setEmployee", json));
     },
+    // Delete employee 
+    deleteEmployee: async (context, employee) => {
+      fetch("https://xhvnti.herokuapp.com/employees/delete/" + employee.employee_id, {
+        method: "DELETE",
+        // body: JSON.stringify(employee),
+        // headers: {
+        //   "Content-type": "application/json; charset=UTF-8",
+        // },
+      })
+        .then((response) => response.json())
+        .then((json) => context.commit("setEmployees", json));
+    },
 
   // Update user 
     updateUser: async (context, user) => {
-      const { id, name, surname, email, phone, password, shipping_address, cart } = user;
-      fetch("https://xhvnti.herokuapp.com/users/update/" +id, {
-        method: "PUT",
-        body: JSON.stringify({
-          name: name,
-          surname: surname,
-          email: email,
-          phone: phone,
-          password: password,
-          shipping_address: shipping_address,
-          cart: cart
-        }),        
+      fetch("https://xhvnti.herokuapp.com/users/update/" + user.user_id, {
+        method: "PATCH",
+        body: JSON.stringify(user),        
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
       })
         .then((response) => response.json())
         .then((json) => context.commit("setUser", json));
+    },
+  // Delete user 
+    deleteUser: async (context, user) => {
+      fetch("https://xhvnti.herokuapp.com/users/delete/" + user.user_id, {
+        method: "DELETE",
+        // body: JSON.stringify(user),        
+        // headers: {
+        //   "Content-type": "application/json; charset=UTF-8",
+        // },
+      })
+        .then((response) => response.json())
+        .then((json) => context.commit("setUsers", json));
     },
 
     // User cart
@@ -359,7 +356,6 @@ export default createStore({
 
     // Add product 
     addProduct: async (context, product) => {
-      console.log(context.state.jwt)
       fetch("https://xhvnti.herokuapp.com/products", {
         method: "POST",
         body: JSON.stringify(product),
@@ -375,18 +371,30 @@ export default createStore({
         });
     },
 
+    // Edit product 
     editProduct: async(context, product) => {
-      fetch("https://xhvnti.herokuapp.com/products", {
+      fetch("https://xhvnti.herokuapp.com/products/update/" + product.product_id, {
         method: "PATCH",
         body: JSON.stringify(product),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
       })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data)
-        });
+      .then((response) => response.json())
+      .then((json) => context.commit("setProducts", json));
+    },
+
+    // Delete product 
+    deleteProduct: async(context, product) => {
+      fetch("https://xhvnti.herokuapp.com/products/delete/" + product.product_id, {
+        method: "DELETE",
+        body: JSON.stringify(product),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+      .then((response) => response.json())
+      .then((json) => context.commit("setProducts", json));
     },
 
     
