@@ -27,11 +27,11 @@
               :key="product"
               :product="product"
             >
-            <p>{{ product.name }}</p>
+            <p>{{ product.title }}</p>
             <p>R{{ product.price }}.00</p>
             </div>
               <div>
-                <button @click="this.$store.dispatch('deletecartItem', product.cartid)">
+                <button @click="this.$store.dispatch('deletecartItem', product.cart_id)">
                   <svg width="20" height="20" viewBox="0 0 59 59" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M52.5 6H38.456C38.346 4.75 37.961 2.642 36.643 1.289C35.809 0.434 34.751 0 33.499 0H23.5C22.248 0 21.19 0.434 20.356 1.289C19.038 2.642 18.653 4.75 18.543 6H6.5C5.948 6 5.5 6.447 5.5 7C5.5 7.553 5.948 8 6.5 8H52.5C53.052 8 53.5 7.553 53.5 7C53.5 6.447 53.052 6 52.5 6ZM21.792 2.681C22.24 2.223 22.799 2 23.5 2H33.499C34.2 2 34.759 2.223 35.207 2.681C36.012 3.504 36.335 4.952 36.447 6H20.553C20.665 4.952 20.988 3.504 21.792 2.681Z" fill="black"/>
                   <path d="M10.456 54.021C10.493 55.743 11.565 59 15.364 59H43.636C47.435 59 48.507 55.743 48.543 54.042L50.376 10H8.624L10.456 54.021ZM48.291 12L46.544 53.979C46.538 54.288 46.4 57 43.636 57H15.364C12.63 57 12.466 54.283 12.455 53.958L10.709 12H48.291Z" fill="black"/>
@@ -42,7 +42,7 @@
                 </button>
               </div>
             
-            <button @click="this.$store.dispatch('clearcart')">
+            <button @click="this.$store.dispatch('clearCart')">
               Clear
             </button>
             <p>
@@ -121,7 +121,7 @@ return {
       },
     },
     mounted() {
-      this.$store.dispatch("getcart");
+      this.$store.dispatch("getCart");
       this.$store.dispatch("updateEmployee");
     },
     methods: {
@@ -158,7 +158,10 @@ return {
         background-color: var(--dark);
         display: flex;
         position: relative;
-        gap: 2rem;  
+        gap: 2rem; 
+        @media screen and (max-width: 390px){
+          flex-direction: column;
+        } 
 
         .profile {
         width: 30%;
@@ -167,6 +170,10 @@ return {
         justify-content: center;
         padding: 1rem;
         gap: 1rem;
+        @media screen and (max-width: 390px){
+          width: 100%;
+          padding: 1rem 3rem;
+        }
       &-info {
         display: flex;
         flex-direction: column;
@@ -177,11 +184,14 @@ return {
         border-radius: 10px;
         form {
           display: flex;
-        flex-direction: column;
-        justify-content: center;
-        width: 70%;
+          flex-direction: column;
+          justify-content: center;
+          width: 70%;
           gap: 0.65rem;
           background-color: var(--dark);
+          @media screen and (max-width: 390px) {
+            width: 100%;
+          }
       input {
           width: 100%;
           border: none;
@@ -220,8 +230,16 @@ return {
         flex-direction: column;
         gap: 1rem;
         width: 60%;
+        @media screen and (max-width: 390px) {
+          width: 100%;
+          background-color: var(--dark);
+        }
         h2 {
           padding-left: 6rem;
+          @media screen and (max-width: 390px) {
+            margin: auto;
+            padding: 0;
+          }
         }
         .buttons {
           display: flex;

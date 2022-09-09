@@ -445,6 +445,14 @@ mounted() {
   display: flex;
   height: 100%;
   padding-right: 2rem;
+
+  @media screen and (max-width: 390px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    padding: 1rem;
+  }
 .inventory {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -455,6 +463,10 @@ mounted() {
   background-color: var(--shadow);
   overflow: scroll;
   border-radius: 10px;
+
+  @media screen and (max-width: 390px) {
+    margin: 0;
+  }
   .title-box {
     display: flex;
     justify-content: space-between;
@@ -512,6 +524,11 @@ mounted() {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(4, 1fr);
     height: 100%;
+
+    @media screen and (max-width: 390px) {
+      display: flex;
+      overflow-x:scroll;
+    }
     &-sales, &-profit, &-inventory {
     min-width: 20rem;
     max-height: 60rem;
@@ -520,6 +537,9 @@ mounted() {
     -webkit-box-shadow: inset 0px 0px 10px 1px rgba(255,255,243,0.63); 
     box-shadow: inset 0px 0px 10px 1px rgba(255,255,243,0.63);
     position: relative;
+    @media screen and (max-width: 390px) {
+      min-width: 15rem;
+    }
     h1 {
     font-size: 32px;
     background: -webkit-linear-gradient(var(--light), var(--accent),var(--highlight));
@@ -529,6 +549,9 @@ mounted() {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    @media screen and (max-width: 390px) {
+      font-size: 18px;
+    }
     }
     }
 &-sales {

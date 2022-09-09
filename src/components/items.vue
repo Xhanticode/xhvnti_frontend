@@ -19,6 +19,9 @@ props: ["product", "Product_id"]
   width: 24rem;
   height: 520px;
   overflow: hidden;
+  @media screen and (max-width: 390px) {
+    margin: 1rem 0rem;
+  }
   img {
     width: 100%;
     height: 100%;

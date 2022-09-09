@@ -14,15 +14,16 @@
     </router-link>
     <div class="menu-bar-dropdown" @mouseleave="menuDropdownHide">
         <div class="menu-bar-dropdown-links">
-            <div v-if="user || employee" style="display: flex; gap: 1rem">
-            <router-link to="/"><p>home</p></router-link>
-            <router-link to="/shop"><p>shop</p></router-link>
-            <router-link to="/about"><p>about</p></router-link>
-            <router-link to="/contact"><p>contact</p></router-link>
+            <div v-if="user || employee" class="pages">
+            <router-link to="/"><p @click="menuDropDownHide">home</p></router-link>
+            <router-link to="/shop"><p @click="menuDropDownHide">shop</p></router-link>
+            <router-link to="/about"><p @click="menuDropDownHide">about</p></router-link>
+            <router-link to="/contact"><p @click="menuDropDownHide">contact</p></router-link>
             </div>
-            <div v-else>
-            <p id="sign-in-button"  @mousedown="showSignInOptions" >sign-in</p>
-            <div class="sign-in-options" @mouseleave="hideSignInOptions">
+            <div v-else @mouseleave="hideSignInOptions">
+            <p id="sign-in-button" @mousedown="showSignInOptions" @click="showSignInOptions" >sign-in</p>
+            <div class="sign-in-options" 
+            >
             <button @click="showCustomerSignIn">customer</button>
             <button @click="showEmployeeSignIn">admin</button>
             </div>
@@ -33,7 +34,7 @@
             <router-link to="/cart" v-if="user"><p>{{user.name}}</p></router-link>
             </div>
         </div>
-        <h3 @mouseover="menuDropdownShow">menu</h3>
+        <h3 @mouseover="menuDropdownShow" @click="menuDropdownShow">menu</h3>
     </div>
     <employeeLogin />
     <userLogin />
@@ -151,6 +152,30 @@ export default {
             align-items: center;
             gap: 1rem;
             transform: translateX(100rem);
+
+            @media screen and (max-width: 390px) {
+                flex-direction: column;
+                z-index: 30;
+                position: absolute;  
+            }
+            .pages {
+                display: flex;
+                gap: 1rem;
+                @media screen and (max-width: 390px) {
+                    flex-direction: column;
+                    z-index: 30;
+                    position: absolute;
+                    top: 12rem;
+                    right: 8.5rem;
+                    background-color: #1D1E18CC;
+                    width: 6rem;
+                    padding: 0.6rem;
+                    border-radius: 5px;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+            
             a {
                 text-decoration: none;
                 &.router-link-exact-active {
@@ -162,12 +187,15 @@ export default {
             p {
                 cursor: pointer;
             }
-            &-profile {
-
-            }
             .sign-in-options {
                 display: none;
                 gap: 0.5rem;
+                @media screen and (max-width: 390px) {
+                    flex-direction: column;
+                    background-color: #1D1E18CC;
+                    border-radius: 5px;
+                    padding: 1rem;
+                }
                 button {
                     padding: 0.2rem;
                     width: 4rem;
@@ -207,8 +235,13 @@ export default {
 
         &-links {
             display: flex;
+            flex-direction: column;
+            top: 3rem;
+            right: 1rem;
+            position: absolute;
             gap: 1rem;
             transform: translateX(100rem);
+            z-index: 30;
             a {
                 text-decoration: none;
                 &.router-link-exact-active {

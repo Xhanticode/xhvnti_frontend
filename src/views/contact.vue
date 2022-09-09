@@ -71,6 +71,13 @@
     #graphic {
   width: 50%;
   height: 100%;
+  @media screen and (max-width: 390px)
+ {
+  // transform: rotateZ(45deg) translateX(-3rem) translateY(51rem);
+  // position: absolute;
+  //   top: 16rem;
+  display: none;
+}
   
   img {
   width: auto;
@@ -83,12 +90,22 @@
       padding: 6rem 6rem 2rem 0rem;
       position: relative;
 
+      @media screen and (max-width: 390px) {
+        width: 100%;
+        padding: 3rem;
+        margin: auto;
+      }
+
       form {
         display: flex;
         flex-direction: column;
         justify-content: space-around;
         gap: 1.5rem;
         width: 26rem;
+
+        @media screen and (max-width: 390px) {
+          width: inherit;
+        }
         
         input, textarea {
             border: none;

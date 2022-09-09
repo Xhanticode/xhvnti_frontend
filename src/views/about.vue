@@ -1,18 +1,15 @@
 <template>
   <div class="about-section">
-    <div id="graphic">
-      <img src="../assets/xhvnti_print_light.png" alt="xhvnti print">
-    </div>
-    <div class="content">
+      <div class="content">
       <h2>about</h2>
       <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt et ab dignissimos explicabo, recusandae, deleniti quibusdam facere odio ea dolorum maiores earum nam. Ab non cum provident totam, alias sequi. Quae veniam, eos est in velit commodi veritatis odio adipisci saepe quidem quibusdam temporibus incidunt error eveniet nobis iusto earum nihil officia ab ad nemo alias. Vel minus omnis neque quibusdam delectus ducimus assumenda perferendis dicta blanditiis, minima nemo quisquam nam nisi dolore facilis doloribus animi dolorum obcaecati sed ipsa alias reprehenderit nostrum cumque. At nostrum nulla ut expedita, tenetur incidunt aut laudantium porro, deserunt eos commodi officia perferendis alias?</p>
       <div class="social-icons">
         <a :href="instagram">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16Z" stroke="black" stroke-width="1.5"/>
-<path d="M17.5 6.51L17.51 6.49889" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16Z" stroke="black" stroke-width="1.5"/>
+        <path d="M17.5 6.51L17.51 6.49889" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         </a>
         <a :href="facebook">
           <svg width="20" height="20" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,6 +30,9 @@
         </a>
       </div>
       <span></span>
+    </div>
+    <div id="graphic">
+      <img src="../assets/xhvnti_print_light.png" alt="xhvnti print">
     </div>
   </div>
 </template>
@@ -55,6 +55,12 @@ export default {
   height: 100%;
   display: flex;
 
+  @media screen and (max-width: 390px) {
+    flex-direction: column;
+    overflow: hidden;
+    height: 100vh;
+  }
+
   #graphic {
 width: 50%;
 height: 100%;
@@ -64,11 +70,22 @@ width: auto;
 height: 100%;
 transform: rotateZ(45deg) translateX(-6rem) translateY(33rem);
 background-color: var(--dark);
+@media screen and (max-width: 390px)
+ {
+  // transform: rotateZ(45deg) translateX(-3rem) translateY(51rem);
+  // position: absolute;
+  //   top: 16rem;
+  display: none;
+}
 }
   }
   .content {
     padding: 6rem 18rem 2rem 0rem;
     position: relative;
+
+    @media screen and (max-width: 390px) {
+      padding: 3rem;
+    }
 
     h2, p {
       color: var(--dark);
@@ -84,6 +101,9 @@ background-color: var(--dark);
       align-items: center;
       justify-content: space-between;
       margin-top: 4rem;
+      @media screen and (max-width: 390px) {
+        display: none;
+      }
     }
     span {
       height: 8rem;
@@ -91,6 +111,16 @@ background-color: var(--dark);
       position: absolute;
       top: 16rem;
     right: 6rem;
+    @media screen and (max-width: 390px) {
+        display: none;
+      }
+    }
+  }
+}
+.pages {
+  @media screen and (max-width: 390px) {
+    p {
+      // color: var(--dark);
     }
   }
 }

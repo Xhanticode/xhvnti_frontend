@@ -127,6 +127,16 @@ export default {
   overflow-x: scroll;
   position: relative;
   background-color: var(--dark);
+  @media screen and (max-width: 390px) {
+    overflow-x: hidden;
+    overflow-: scroll;
+    flex-direction: column;
+  }
+  svg {
+    @media screen and (max-width: 390px) {
+      transform: rotate(90deg);
+    }
+  }
 &::-webkit-scrollbar {
   display: none;
 }
