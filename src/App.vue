@@ -70,13 +70,13 @@ p {
     height: 80vh;
     overflow: hidden;
     overflow-x: scroll;
-    @media screen and (max-width: 390px) {
+    @media screen and (max-width: 500px) {
       overflow-y: scroll;
     }
   }
   .footer {
     height: 5vh;
-    @media screen and (max-width: 390px) {
+    @media screen and (max-width: 500px) {
       bottom: 0;
       z-index: 2;
       position: absolute;

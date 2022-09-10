@@ -55,7 +55,7 @@ export default {
   height: 100%;
   display: flex;
 
-  @media screen and (max-width: 390px) {
+  @media screen and (max-width: 500px) {
     flex-direction: column;
     overflow: hidden;
     height: 100vh;
@@ -70,7 +70,7 @@ width: auto;
 height: 100%;
 transform: rotateZ(45deg) translateX(-6rem) translateY(33rem);
 background-color: var(--dark);
-@media screen and (max-width: 390px)
+@media screen and (max-width: 500px)
  {
   // transform: rotateZ(45deg) translateX(-3rem) translateY(51rem);
   // position: absolute;
@@ -83,7 +83,7 @@ background-color: var(--dark);
     padding: 6rem 18rem 2rem 0rem;
     position: relative;
 
-    @media screen and (max-width: 390px) {
+    @media screen and (max-width: 500px) {
       padding: 3rem;
     }
 
@@ -101,7 +101,7 @@ background-color: var(--dark);
       align-items: center;
       justify-content: space-between;
       margin-top: 4rem;
-      @media screen and (max-width: 390px) {
+      @media screen and (max-width: 500px) {
         display: none;
       }
     }
@@ -111,14 +111,14 @@ background-color: var(--dark);
       position: absolute;
       top: 16rem;
     right: 6rem;
-    @media screen and (max-width: 390px) {
+    @media screen and (max-width: 500px) {
         display: none;
       }
     }
   }
 }
 .pages {
-  @media screen and (max-width: 390px) {
+  @media screen and (max-width: 500px) {
     p {
       // color: var(--dark);
     }

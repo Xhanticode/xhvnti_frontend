@@ -446,7 +446,7 @@ mounted() {
   height: 100%;
   padding-right: 2rem;
 
-  @media screen and (max-width: 390px) {
+  @media screen and (max-width: 500px) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -464,7 +464,7 @@ mounted() {
   overflow: scroll;
   border-radius: 10px;
 
-  @media screen and (max-width: 390px) {
+  @media screen and (max-width: 500px) {
     margin: 0;
   }
   .title-box {
@@ -525,7 +525,7 @@ mounted() {
     grid-template-rows: repeat(4, 1fr);
     height: 100%;
 
-    @media screen and (max-width: 390px) {
+    @media screen and (max-width: 500px) {
       display: flex;
       overflow-x:scroll;
     }
@@ -537,7 +537,7 @@ mounted() {
     -webkit-box-shadow: inset 0px 0px 10px 1px rgba(255,255,243,0.63); 
     box-shadow: inset 0px 0px 10px 1px rgba(255,255,243,0.63);
     position: relative;
-    @media screen and (max-width: 390px) {
+    @media screen and (max-width: 500px) {
       min-width: 15rem;
     }
     h1 {
@@ -549,7 +549,7 @@ mounted() {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    @media screen and (max-width: 390px) {
+    @media screen and (max-width: 500px) {
       font-size: 18px;
     }
     }

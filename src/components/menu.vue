@@ -153,7 +153,7 @@ export default {
             gap: 1rem;
             transform: translateX(100rem);
 
-            @media screen and (max-width: 390px) {
+            @media screen and (max-width: 500px) {
                 flex-direction: column;
                 z-index: 30;
                 position: absolute;  
@@ -161,7 +161,7 @@ export default {
             .pages {
                 display: flex;
                 gap: 1rem;
-                @media screen and (max-width: 390px) {
+                @media screen and (max-width: 500px) {
                     flex-direction: column;
                     z-index: 30;
                     position: absolute;
@@ -190,7 +190,7 @@ export default {
             .sign-in-options {
                 display: none;
                 gap: 0.5rem;
-                @media screen and (max-width: 390px) {
+                @media screen and (max-width: 500px) {
                     flex-direction: column;
                     background-color: #1D1E18CC;
                     border-radius: 5px;
@@ -219,7 +219,7 @@ export default {
         }
     }
 }
-@media screen and (max-width: 390px){
+@media screen and (max-width: 500px){
     .menu-bar {
 #logo {
     padding: 0.2rem 0;

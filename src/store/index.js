@@ -227,7 +227,7 @@ export default createStore({
         }
       )
         .then((response) => response.json())
-        .then((json) => context.commit("setEmployee", json));
+        .then((json) => context.commit("setEmployee", json), alert("Updated!"));
     },
     // Delete employee
     deleteEmployee: async (context, employee) => {
@@ -242,7 +242,7 @@ export default createStore({
         }
       )
         .then((response) => response.json())
-        .then((json) => context.commit("setEmployees", json));
+        .then((json) => context.commit("setEmployees", json), alert("Employee deleted"));
     },
 
     // Update user
@@ -255,7 +255,7 @@ export default createStore({
         },
       })
         .then((response) => response.json())
-        .then((json) => context.commit("setUser", json));
+        .then((json) => context.commit("setUser", json), alert("Updated!"));
     },
     // Delete user
     deleteUser: async (context, user) => {
@@ -267,7 +267,7 @@ export default createStore({
         // },
       })
         .then((response) => response.json())
-        .then((json) => context.commit("setUsers", json));
+        .then((json) => context.commit("setUsers", json), alert("User deleted"));
     },
 
     // User cart
@@ -304,8 +304,9 @@ export default createStore({
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
-          context.commit("setCart", id);
+          console.log(data.results);
+          context.commit("setCart", data.results);
+          alert("Added to cart!");
         });
     },
     clearCart: async (context, id) => {

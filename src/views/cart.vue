@@ -21,12 +21,13 @@
         </div>
     <div class="cart-section">
       <h2>Cart Summary</h2>
-      <div v-if="cart" class="buttons">
+      <div v-if="cart">
             <div
-              v-for="product in cart"
+              v-for="product of cart"
               :key="product"
               :product="product"
             >
+            <img :src="product.img" alt="">
             <p>{{ product.title }}</p>
             <p>R{{ product.price }}.00</p>
             </div>
@@ -103,7 +104,7 @@ return {
       total() {
         let prices = this.$store.state.cart;
         if (prices != null) {
-          let sum = prices.reduce((x, cart) => {
+          let sum = ((x, cart) => {
             return x + cart.price;
           }, 0);
           return sum;
@@ -159,7 +160,7 @@ return {
         display: flex;
         position: relative;
         gap: 2rem; 
-        @media screen and (max-width: 390px){
+        @media screen and (max-width: 500px){
           flex-direction: column;
         } 
 
@@ -170,7 +171,7 @@ return {
         justify-content: center;
         padding: 1rem;
         gap: 1rem;
-        @media screen and (max-width: 390px){
+        @media screen and (max-width: 500px){
           width: 100%;
           padding: 1rem 3rem;
         }
@@ -189,7 +190,7 @@ return {
           width: 70%;
           gap: 0.65rem;
           background-color: var(--dark);
-          @media screen and (max-width: 390px) {
+          @media screen and (max-width: 500px) {
             width: 100%;
           }
       input {
@@ -230,13 +231,13 @@ return {
         flex-direction: column;
         gap: 1rem;
         width: 60%;
-        @media screen and (max-width: 390px) {
+        @media screen and (max-width: 500px) {
           width: 100%;
           background-color: var(--dark);
         }
         h2 {
           padding-left: 6rem;
-          @media screen and (max-width: 390px) {
+          @media screen and (max-width: 500px) {
             margin: auto;
             padding: 0;
           }

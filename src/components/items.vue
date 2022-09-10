@@ -19,7 +19,7 @@ props: ["product", "Product_id"]
   width: 24rem;
   height: 520px;
   overflow: hidden;
-  @media screen and (max-width: 390px) {
+  @media screen and (max-width: 500px) {
     margin: 1rem 0rem;
   }
   img {

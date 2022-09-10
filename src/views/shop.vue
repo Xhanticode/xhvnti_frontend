@@ -127,13 +127,13 @@ export default {
   overflow-x: scroll;
   position: relative;
   background-color: var(--dark);
-  @media screen and (max-width: 390px) {
+  @media screen and (max-width: 500px) {
     overflow-x: hidden;
     overflow-: scroll;
     flex-direction: column;
   }
   svg {
-    @media screen and (max-width: 390px) {
+    @media screen and (max-width: 500px) {
       transform: rotate(90deg);
     }
   }

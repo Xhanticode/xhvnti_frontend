@@ -71,7 +71,7 @@
     #graphic {
   width: 50%;
   height: 100%;
-  @media screen and (max-width: 390px)
+  @media screen and (max-width: 500px)
  {
   // transform: rotateZ(45deg) translateX(-3rem) translateY(51rem);
   // position: absolute;
@@ -90,7 +90,7 @@
       padding: 6rem 6rem 2rem 0rem;
       position: relative;
 
-      @media screen and (max-width: 390px) {
+      @media screen and (max-width: 500px) {
         width: 100%;
         padding: 3rem;
         margin: auto;
@@ -103,7 +103,7 @@
         gap: 1.5rem;
         width: 26rem;
 
-        @media screen and (max-width: 390px) {
+        @media screen and (max-width: 500px) {
           width: inherit;
         }
         

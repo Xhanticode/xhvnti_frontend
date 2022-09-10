@@ -61,21 +61,21 @@ methods: {
   justify-content: center;
   align-items: center;
 
-  @media screen and (max-width: 390px) {
+  @media screen and (max-width: 500px) {
     flex-direction: column;
   }
 
   .product-image {
     height: 100%;
     width: 40%;
-    @media screen and (max-width: 390px) {
+    @media screen and (max-width: 500px) {
       width: 100%;
     }
     img {
       width: 26rem;
       height: 34rem;
       object-fit: cover;
-      @media screen and (max-width: 390px) {
+      @media screen and (max-width: 500px) {
       width: 100%;
       height: 100%;
     }
@@ -89,7 +89,7 @@ methods: {
   width: 40%;
   padding: 2rem;
   position: relative;
-  @media screen and (max-width: 390px) {
+  @media screen and (max-width: 500px) {
       width: 100%;
     }
 
@@ -109,7 +109,7 @@ p {
 }
 .price-box {
   position: absolute;
-  bottom: 2rem;
+  top: 2rem;
 }
 #close-button {
   position: absolute;
