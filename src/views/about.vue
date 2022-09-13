@@ -2,7 +2,7 @@
   <div class="about-section">
       <div class="content">
       <h2>about</h2>
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt et ab dignissimos explicabo, recusandae, deleniti quibusdam facere odio ea dolorum maiores earum nam. Ab non cum provident totam, alias sequi. Quae veniam, eos est in velit commodi veritatis odio adipisci saepe quidem quibusdam temporibus incidunt error eveniet nobis iusto earum nihil officia ab ad nemo alias. Vel minus omnis neque quibusdam delectus ducimus assumenda perferendis dicta blanditiis, minima nemo quisquam nam nisi dolore facilis doloribus animi dolorum obcaecati sed ipsa alias reprehenderit nostrum cumque. At nostrum nulla ut expedita, tenetur incidunt aut laudantium porro, deserunt eos commodi officia perferendis alias?</p>
+      <p>Xhvnti, founded by Xhanti Mpu is his eponymous brand which was founded in 2018. At the core of the brand is deconstruction: the deconstruction of societal boundaries and rules whose meaning translates to constrictive clothing. The brand is also a celebration of afrocentrism and an adoration of the different Southern African cultures. Xhanti hopes to make this a historical archive of culture. </p>
       <div class="social-icons">
         <a :href="instagram">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
