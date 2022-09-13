@@ -83,10 +83,7 @@ background-color: var(--dark);
     padding: 6rem 18rem 2rem 0rem;
     position: relative;
 
-    @media screen and (max-width: 500px) {
-      padding: 3rem;
-    }
-
+    
     h2, p {
       color: var(--dark);
     }
@@ -95,6 +92,9 @@ background-color: var(--dark);
     }
     p {
       line-height: 1.5rem;
+    }
+    @media screen and (max-width: 500px) {
+      padding: 3rem;
     }
     .social-icons {
       display: flex;
