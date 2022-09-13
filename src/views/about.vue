@@ -1,6 +1,10 @@
 <template>
   <div class="about-section">
-      <div class="content">
+      
+    <div id="graphic">
+      <img src="../assets/xhvnti_print_light.png" alt="xhvnti print">
+    </div>
+    <div class="content">
       <h2>about</h2>
       <p>Xhvnti, founded by Xhanti Mpu is his eponymous brand which was founded in 2018. At the core of the brand is deconstruction: the deconstruction of societal boundaries and rules whose meaning translates to constrictive clothing. The brand is also a celebration of afrocentrism and an adoration of the different Southern African cultures. Xhanti hopes to make this a historical archive of culture. </p>
       <div class="social-icons">
@@ -30,9 +34,6 @@
         </a>
       </div>
       <span></span>
-    </div>
-    <div id="graphic">
-      <img src="../assets/xhvnti_print_light.png" alt="xhvnti print">
     </div>
   </div>
 </template>
